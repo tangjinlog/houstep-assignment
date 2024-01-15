@@ -1,0 +1,32 @@
+:root {
+	--white: #ffffff;
+	--black: #000000;
+	--color-gray-1: #111111;
+	--color-gray-3: #c1c1c1;
+
+	/* padding */
+	--padding-s: 1rem;
+	--padding-m: 2rem;
+	--padding-l: 4rem;
+
+	/* margin */
+	--margin-s: 0.5rem;
+	--margin-m: 1rem;
+	--margin-l: 1.5rem;
+
+	/* gap */
+	--gap-xs: 0.7rem;
+	--gap-s: 1rem;
+	--gap-m: 1.5rem;
+	--gap-l: 2rem;
+
+	/* border-radius */
+	--radius-s: 6px;
+	--radius-m: 12px;
+	--radius-l: 18px;
+
+	/* z-index */
+	--idx-2: 2;
+	--idx-3: 3;
+	--idx-4: 4;
+}
