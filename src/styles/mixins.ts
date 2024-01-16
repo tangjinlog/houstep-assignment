@@ -28,3 +28,10 @@ export const absoluteCenter = css`
 	left: 50%;
 	transform: translate3d(-50%, -50%, 0);
 `;
+
+type FixedType = 'top' | 'bottom';
+export const fixed = (props: FixedType) => css`
+	position: fixed;
+	top: ${props === 'top' ? 0 : `initial`};
+	bottom: ${props === 'bottom' ? 0 : `initial`};
+`;

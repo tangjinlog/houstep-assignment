@@ -9,7 +9,7 @@ const Wrapper = styled.div`
 	height: 57px;
 	padding: var(--padding-xs);
 	background-color: var(--black);
-	box-shadow: var(--shadow-s);
+	box-shadow: var(--shadow-bottom-s);
 `;
 
 function Header() {
