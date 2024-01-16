@@ -5,6 +5,7 @@
 	--color-gray-3: #c1c1c1;
 
 	/* padding */
+	--padding-xs: 0.75rem;
 	--padding-s: 1rem;
 	--padding-m: 2rem;
 	--padding-l: 4rem;
@@ -29,4 +30,7 @@
 	--idx-2: 2;
 	--idx-3: 3;
 	--idx-4: 4;
+
+	/* box-shadow */
+	--shadow-s: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
 }
