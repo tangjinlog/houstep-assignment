@@ -33,13 +33,7 @@ const ButtonStyle = styled.button<PropTypes>`
 	align-items: center;
 	border: none;
 	border-radius: 20px;
-	${(props) =>
-		props.primary
-			? primary
-			: css`
-					color: var(--white);
-					background-color: var(--color-gray-3);
-				`}
+	${(props) => (props.primary ? primary : '')}
 	${(props) => (props.size ? sizes[props.size] : '')}
 `;
 

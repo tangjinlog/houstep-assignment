@@ -2,6 +2,7 @@ import styled from '@emotion/styled';
 import { fullScreen, flexCenter } from '@styles/mixins';
 import Button from '@atoms/Button';
 import Logo from '@atoms/Logo';
+import Link from 'next/link';
 
 const Wrapper = styled.main`
 	${fullScreen};
@@ -11,13 +12,17 @@ const Wrapper = styled.main`
 	gap: var(--gap-l);
 `;
 
+const OrderPageButton = styled(Link)``;
+
 function index() {
 	return (
 		<Wrapper>
 			<Logo size="big" />
-			<Button primary size="big">
-				주문하러 가기
-			</Button>
+			<OrderPageButton href={'/order'}>
+				<Button primary size="big">
+					주문하러 가기
+				</Button>
+			</OrderPageButton>
 		</Wrapper>
 	);
 }

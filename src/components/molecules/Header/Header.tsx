@@ -1,8 +1,10 @@
 import styled from '@emotion/styled';
 import Logo from '@atoms/Logo';
-import { flexBetween } from '@styles/mixins';
+import Link from 'next/link';
+import { flexBetween, fixed } from '@styles/mixins';
 
 const Wrapper = styled.div`
+	${fixed(`top`)}
 	${flexBetween};
 	align-items: center;
 	width: 100%;
@@ -12,10 +14,16 @@ const Wrapper = styled.div`
 	box-shadow: var(--shadow-bottom-s);
 `;
 
+const HomeButton = styled(Link)`
+	background: none;
+`;
+
 function Header() {
 	return (
 		<Wrapper>
-			<Logo size="mid" />
+			<HomeButton href={'/'} replace>
+				<Logo size="mid" />
+			</HomeButton>
 		</Wrapper>
 	);
 }
