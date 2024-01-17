@@ -1,0 +1,14 @@
+import { atom } from 'recoil';
+
+export const orderItemState = atom({
+	key: `orderItemState`,
+	default: [
+		{
+			id: '',
+			name: '',
+			event: 0,
+			materialType: 0,
+			price: 0,
+		},
+	],
+});
