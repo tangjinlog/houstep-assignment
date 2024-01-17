@@ -2,10 +2,13 @@ import styled from '@emotion/styled';
 import OrderItem from '@molecules/OrderItem';
 import { orderItemState } from '@states/atom';
 import { useRecoilValue } from 'recoil';
+import { flexColumn } from '@styles/mixins';
 import type { OrderContainerPropsType } from '@templates/Order/OrderTemp';
 
 const Wrapper = styled.section`
-	padding: var(--padding-s) 0px 200px 0px;
+	${flexColumn};
+	gap: 18px;
+	padding: var(--padding-s) var(--padding-m) 200px;
 	margin-top: 57px;
 `;
 
