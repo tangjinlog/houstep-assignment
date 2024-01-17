@@ -8,6 +8,7 @@ import {
 	QueryClient,
 	QueryClientProvider,
 } from '@tanstack/react-query';
+import { inter } from '@styles/fonts';
 
 export default function App({ Component, pageProps }: AppProps) {
 	const [queryClient] = useState(
@@ -25,7 +26,9 @@ export default function App({ Component, pageProps }: AppProps) {
 		<RecoilRoot>
 			<QueryClientProvider client={queryClient}>
 				<HydrationBoundary state={pageProps.dehydratedState}>
-					<Component {...pageProps} />
+					<main className={inter.className}>
+						<Component {...pageProps} />
+					</main>
 				</HydrationBoundary>
 			</QueryClientProvider>
 		</RecoilRoot>
