@@ -2,6 +2,7 @@ import { useFetchOrderItems } from '@queries/order/hooks';
 import { orderItemState } from '@states/atom';
 import { useEffect, useMemo } from 'react';
 import { useSetRecoilState } from 'recoil';
+import Loading from '@molecules/Loading';
 
 export function OrderListItemFetcher({
 	children,
@@ -27,18 +28,7 @@ export function OrderListItemFetcher({
 	}
 
 	if (isFetching) {
-		return (
-			<div
-				style={{
-					position: 'absolute',
-					top: '50%',
-					left: '45%',
-					fontSize: '4rem',
-				}}
-			>
-				준비중입니다.
-			</div>
-		);
+		return <Loading type={'order'} />;
 	}
 	const toRender =
 		typeof children === 'function'

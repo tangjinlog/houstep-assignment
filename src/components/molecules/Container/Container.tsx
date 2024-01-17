@@ -4,7 +4,7 @@ import { orderItemState } from '@states/atom';
 import { useRecoilValue } from 'recoil';
 import type { OrderContainerPropsType } from '@templates/Order/OrderTemp';
 
-const Wrapper = styled.div`
+const Wrapper = styled.section`
 	padding: var(--padding-s) 0px 200px 0px;
 	margin-top: 57px;
 `;
