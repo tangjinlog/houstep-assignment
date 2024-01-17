@@ -22,6 +22,8 @@
 			"@organisms/*": ["./components/organisms/*"],
 			"@templates/*": ["./components/templates/*"],
 			"@pages/*": ["./pages/*"],
+			"@queries/*": ["./queries/*"],
+			"@states/*": ["./states/*"],
 			"@styles/*": ["./styles/*"],
 			"@utils/*": ["./utils/*"]
 		}
