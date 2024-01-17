@@ -3,13 +3,15 @@ import { css } from '@emotion/react';
 
 import { fontBig } from '@styles/fonts';
 
-interface PropTypes extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+export interface PropTypes
+	extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 	children: React.ReactNode;
 	primary?: boolean;
 	size?: 'big' | 'mid';
 }
 
 const primary = css`
+	${fontBig};
 	color: var(--black);
 	background-color: var(--white);
 `;
@@ -27,7 +29,6 @@ const mid = css`
 const sizes = { big, mid };
 
 const ButtonStyle = styled.button<PropTypes>`
-	${fontBig};
 	display: flex;
 	justify-content: center;
 	align-items: center;
