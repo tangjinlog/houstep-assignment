@@ -11,6 +11,7 @@ const Wrapper = styled.div`
 	width: 100%;
 	height: 170px;
 	padding: var(--padding-m);
+	background-color: var(--white);
 	border-radius: 20px 20px 0 0;
 	box-shadow: var(--shadow-top-s);
 `;
@@ -28,9 +29,12 @@ const OrderButton = styled(Button)`
 	width: 100%;
 	height: 48px;
 	border-radius: 0;
+	color: var(--white);
+	background-color: var(--color-gray-3);
 `;
 
 function OrderModal() {
+	//TODO: recoil 적용
 	return (
 		<Wrapper>
 			<div>
