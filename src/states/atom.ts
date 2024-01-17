@@ -12,3 +12,14 @@ export const orderItemState = atom({
 		},
 	],
 });
+
+export const orderListState = atom({
+	key: `orderListState`,
+	default: [
+		{
+			id: '',
+			count: 0,
+			totalPrice: 0,
+		},
+	],
+});
