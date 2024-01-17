@@ -10,7 +10,7 @@ export function OrderListItemFetcher({
 	children: React.ReactNode | Function;
 }) {
 	const setItems = useSetRecoilState(orderItemState);
-	const { data, isError, curPage, hasNextPage, isFetching, fetchNextPage } =
+	const { data, isError, hasNextPage, isFetching, fetchNextPage } =
 		useFetchOrderItems();
 
 	const items = useMemo(
@@ -35,12 +35,5 @@ export function OrderListItemFetcher({
 			? children({ fetchNextPage, hasNextPage, isFetching })
 			: children;
 
-	return (
-		<>
-			<div style={{ position: 'absolute', top: '50%', left: '45%' }}>
-				<h2>{`${curPage}`}</h2>
-			</div>
-			{toRender}
-		</>
-	);
+	return <>{toRender}</>;
 }

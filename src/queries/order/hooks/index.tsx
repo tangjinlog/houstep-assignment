@@ -19,7 +19,6 @@ export const useFetchOrderItems = () => {
 	return {
 		data: data,
 		isError,
-		curPage: data?.pageParams[data?.pageParams.length - 1],
 		hasNextPage,
 		isFetching,
 		fetchNextPage,
