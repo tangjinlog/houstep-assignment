@@ -3,7 +3,7 @@ import { css } from '@emotion/react';
 
 import { fontBig } from '@styles/fonts';
 
-export interface PropTypes
+export interface ButtonPropTypes
 	extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 	children: React.ReactNode;
 	primary?: boolean;
@@ -28,21 +28,22 @@ const mid = css`
 
 const sizes = { big, mid };
 
-const ButtonStyle = styled.button<PropTypes>`
+const StyledButton = styled.button<ButtonPropTypes>`
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	border: none;
 	border-radius: 20px;
+	cursor: pointer;
 	${(props) => (props.primary ? primary : '')}
 	${(props) => (props.size ? sizes[props.size] : '')}
 `;
 
-function Button({ children, ...props }: PropTypes) {
+function Button({ children, ...props }: ButtonPropTypes) {
 	return (
-		<ButtonStyle type="button" {...props}>
+		<StyledButton type="button" {...props}>
 			{children}
-		</ButtonStyle>
+		</StyledButton>
 	);
 }
 

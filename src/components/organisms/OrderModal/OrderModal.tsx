@@ -4,8 +4,8 @@ import { flexColumn, fixed } from '@styles/mixins';
 import { fontMid } from '@styles/fonts';
 import { useRecoilValue } from 'recoil';
 import { orderListState } from '@states/atom';
-import type { PropTypes } from '@atoms/Button/Button';
 import { css } from '@emotion/react';
+import type { ButtonPropTypes } from '@atoms/Button/Button';
 
 const Wrapper = styled.div`
 	${fixed(`bottom`)};
@@ -29,7 +29,7 @@ const OrderPrice = styled.div`
 	text-align: right;
 `;
 
-interface OrderButtonPropTypes extends PropTypes {
+interface OrderButtonPropTypes extends ButtonPropTypes {
 	totalCount: number;
 }
 
