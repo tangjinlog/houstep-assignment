@@ -59,7 +59,7 @@ function OrderCounter({ id, price, setIsCounted }: OrderCounterProps) {
 	const mapSetter = useCallback(
 		(map: Map<string, OrderTypes>, obj: OrderTypes, type?: 'inc' | 'dec') => {
 			if (type) {
-				return orderMap.set(id, {
+				return map.set(id, {
 					id,
 					count: type === 'inc' ? count + 1 : count - 1,
 					totalPrice:
@@ -92,9 +92,9 @@ function OrderCounter({ id, price, setIsCounted }: OrderCounterProps) {
 			mapSetter(orderMap, updatedOrder);
 
 			const updatedList: OrderTypes[] = [...orderMap].flatMap(
-				([key, orderList]) => orderList,
+				([key, orderList]: [string, OrderTypes[]]) => orderList,
 			);
-			return updatedList;
+			return updatedList.filter((list) => list.count !== 0);
 		},
 		[count],
 	);
