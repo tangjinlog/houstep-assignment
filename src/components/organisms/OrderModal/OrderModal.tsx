@@ -1,10 +1,10 @@
 import styled from '@emotion/styled';
+import { css } from '@emotion/react';
 import Button from '@atoms/Button';
 import { flexColumn, fixed } from '@styles/mixins';
 import { fontMid } from '@styles/fonts';
 import { useRecoilValue } from 'recoil';
 import { orderListState } from '@states/atom';
-import { css } from '@emotion/react';
 import type { ButtonPropTypes } from '@atoms/Button/Button';
 
 const Wrapper = styled.div`
@@ -60,6 +60,7 @@ function OrderModal() {
 			},
 			[0, 0],
 		);
+	console.log(orderList);
 	return (
 		<Wrapper>
 			<div>
