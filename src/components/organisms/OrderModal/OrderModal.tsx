@@ -33,6 +33,7 @@ const OrderPrice = styled.div`
 
 interface OrderButtonPropTypes extends ButtonPropTypes {
 	totalCount: number;
+	isPending: boolean;
 }
 
 const OrderButton = styled(Button)<OrderButtonPropTypes>`
@@ -48,9 +49,13 @@ const OrderButton = styled(Button)<OrderButtonPropTypes>`
 					background-color: var(--black);
 				`
 			: ''}
+	${(props) =>
+		props.isPending
+			? css`
+					background-color: var(--color-gray-3);
+				`
+			: ''}
 `;
-//TODO: 주문 데이터 보내기
-// orderList 버튼에 보내기
 function OrderModal() {
 	const isSelected = useSetRecoilState(orderSelectedState);
 	const orderList = useRecoilValue(orderListState);
@@ -84,6 +89,7 @@ function OrderModal() {
 			</div>
 			<OrderButton
 				totalCount={totalCount}
+				isPending={isPending}
 				disabled={totalCount === 0}
 				onClick={handleClick}
 			>
