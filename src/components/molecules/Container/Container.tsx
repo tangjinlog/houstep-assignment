@@ -4,6 +4,7 @@ import { orderItemState } from '@states/atom';
 import { useRecoilValue } from 'recoil';
 import { flexColumn } from '@styles/mixins';
 import type { OrderContainerPropsType } from '@templates/Order/OrderTemp';
+import Loading from '@molecules/Loading';
 
 const Wrapper = styled.section`
 	${flexColumn};
@@ -12,22 +13,18 @@ const Wrapper = styled.section`
 	margin-top: 57px;
 `;
 
+const Target = styled.div`
+	height: 1px;
+`;
+
 export function OrderListContainer({
-	fetchNextPage,
-	hasNextPage,
 	isFetching,
+	innerRef,
 }: OrderContainerPropsType) {
 	const value = useRecoilValue(orderItemState);
 	return (
 		<Wrapper>
-			<button
-				onClick={() => {
-					//TODO: to InterSection Observer
-					if (hasNextPage && !isFetching) fetchNextPage();
-				}}
-			>
-				다음페이지
-			</button>
+			{isFetching && <Loading type="order" />}
 			{value
 				? value.map((item) => (
 						<OrderItem
@@ -40,6 +37,7 @@ export function OrderListContainer({
 						/>
 					))
 				: null}
+			<Target ref={innerRef} />
 		</Wrapper>
 	);
 }

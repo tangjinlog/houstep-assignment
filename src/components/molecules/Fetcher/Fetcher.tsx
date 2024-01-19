@@ -2,7 +2,7 @@ import { useFetchOrderItems } from '@queries/order/hooks';
 import { orderItemState } from '@states/atom';
 import { useEffect, useMemo } from 'react';
 import { useSetRecoilState } from 'recoil';
-import Loading from '@molecules/Loading';
+import { useIntersect } from '@utils/hooks';
 
 export function OrderListItemFetcher({
 	children,
@@ -18,21 +18,23 @@ export function OrderListItemFetcher({
 		[data],
 	);
 
+	const innerRef = useIntersect(async (entry, observer) => {
+		observer.unobserve(entry.target);
+		if (hasNextPage && !isFetching) fetchNextPage();
+	});
+
 	useEffect(() => {
 		setItems(items);
 	}, [data]);
 
 	if (isError) {
 		//TODO: custom Error 적용 + ErrorBoundary
-		throw new Error();
+		throw new Error('목록을 불러오는 도중 에러가 발생했습니다.');
 	}
 
-	if (isFetching) {
-		return <Loading type={'order'} />;
-	}
 	const toRender =
 		typeof children === 'function'
-			? children({ fetchNextPage, hasNextPage, isFetching })
+			? children({ isFetching, innerRef })
 			: children;
 
 	return <>{toRender}</>;
