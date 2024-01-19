@@ -1,11 +1,17 @@
 import styled from '@emotion/styled';
 import { css } from '@emotion/react';
-import { Dispatch, SetStateAction, useCallback, useState } from 'react';
+import {
+	Dispatch,
+	SetStateAction,
+	useCallback,
+	useEffect,
+	useState,
+} from 'react';
 import Button from '@atoms/Button';
 import { fontMid } from '@styles/fonts';
 import { orderListState } from '@states/atom';
-import { useSetRecoilState } from 'recoil';
-//TODO: useRouteControl 적용
+import { useRecoilState } from 'recoil';
+
 const buttonStyle = css`
 	${fontMid};
 	display: inline-block;
@@ -50,11 +56,17 @@ interface OrderCounterProps {
 export type OrderTypes = { id: string; count: number; totalPrice: number };
 
 function OrderCounter({ id, price, setIsCounted }: OrderCounterProps) {
-	const setOrderList = useSetRecoilState(orderListState);
+	const [orderList, setOrderList] = useRecoilState(orderListState);
 	const [isClicked, setIsClicked] = useState(false);
 	const [count, setCount] = useState(0);
 
 	let orderMap = new Map();
+
+	useEffect(() => {
+		const count = orderList.find((list) => list.id === id)?.count;
+		count && setCount(count);
+		count && setIsCounted(true);
+	}, []);
 
 	const mapSetter = useCallback(
 		(map: Map<string, OrderTypes>, obj: OrderTypes, type?: 'inc' | 'dec') => {
