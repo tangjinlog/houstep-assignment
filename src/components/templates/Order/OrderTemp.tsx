@@ -3,12 +3,12 @@ import { OrderListContainer } from '@molecules/Container';
 import OrderModal from '@organisms/OrderModal';
 
 export interface OrderContainerPropsType {
-	fetchNextPage: () => void;
-	hasNextPage: boolean;
 	isFetching: boolean;
+	innerRef: React.RefObject<HTMLDivElement>;
 }
 function OrderTemp() {
 	return (
+		//TODO: apiBoundary
 		<>
 			<OrderListItemFetcher>
 				{(props: OrderContainerPropsType) => <OrderListContainer {...props} />}

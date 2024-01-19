@@ -15,12 +15,12 @@ interface LoadingProps {
 	type: 'order' | 'other';
 }
 
-function Loading({ type }: LoadingProps) {
-	const content = {
-		order: `목록을\n불러오고 있습니다.`,
-		other: `로딩중입니다...`,
-	};
+const content = {
+	order: `목록을\n불러오고 있습니다.`,
+	other: `로딩중입니다...`,
+};
 
+function Loading({ type }: LoadingProps) {
 	return (
 		<Wrapper>
 			<LoadingContent>{content[type]}</LoadingContent>
