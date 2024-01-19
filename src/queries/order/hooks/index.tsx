@@ -8,13 +8,8 @@ export const useFetchOrderItems = () => {
 			queryKey: orderKey.list(),
 			queryFn: ({ pageParam }) => orderHandlers.getItems(pageParam),
 			initialPageParam: 1,
-			getNextPageParam: (lastPage, allPages, lastPageParam) => {
-				if (lastPageParam >= lastPage.pages) {
-					return undefined;
-				} else {
-					return lastPageParam + 1;
-				}
-			},
+			getNextPageParam: (lastPage, allPages, lastPageParam) =>
+				lastPageParam >= lastPage.pages ? undefined : lastPageParam + 1,
 		});
 	return {
 		data: data,
