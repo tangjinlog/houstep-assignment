@@ -1,12 +1,15 @@
+import styled from '@emotion/styled';
 import Header from '@molecules/Header';
-import OrderModal from '@molecules/OrderModal';
+import OrderTemp from '@templates/Order/OrderTemp';
+
+const Wrapper = styled.main``;
 
 function order() {
 	return (
-		<>
+		<Wrapper>
 			<Header />
-			<OrderModal />
-		</>
+			<OrderTemp />
+		</Wrapper>
 	);
 }
 

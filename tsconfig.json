@@ -1,6 +1,6 @@
 {
 	"compilerOptions": {
-		"target": "es5",
+		"target": "es2015",
 		"lib": ["dom", "dom.iterable", "esnext"],
 		"allowJs": true,
 		"skipLibCheck": true,
@@ -22,6 +22,8 @@
 			"@organisms/*": ["./components/organisms/*"],
 			"@templates/*": ["./components/templates/*"],
 			"@pages/*": ["./pages/*"],
+			"@queries/*": ["./queries/*"],
+			"@states/*": ["./states/*"],
 			"@styles/*": ["./styles/*"],
 			"@utils/*": ["./utils/*"]
 		}
