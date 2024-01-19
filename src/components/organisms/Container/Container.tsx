@@ -1,12 +1,13 @@
 import styled from '@emotion/styled';
-import { orderItemState } from '@states/atom';
-import { useRecoilValue } from 'recoil';
+import { orderItemState, orderListState } from '@states/atom';
+import { useRecoilValue, useResetRecoilState } from 'recoil';
 import { flexColumn } from '@styles/mixins';
 import OrderItem from '@molecules/OrderItem';
 import Loading from '@molecules/Loading';
 import useModal from '@utils/hooks/useModal';
 import useRouteControl from '@utils/hooks/useRouteControl';
 import type { OrderContainerPropsType } from '@templates/Order/OrderTemp';
+import { useCallback } from 'react';
 
 const Wrapper = styled.section`
 	${flexColumn};
@@ -23,9 +24,16 @@ export function OrderListContainer({
 	isFetching,
 	innerRef,
 }: OrderContainerPropsType) {
-	const [Modal, HandleOpen] = useModal();
-	const { unBlockingWithCallback } = useRouteControl(HandleOpen);
-	const value = useRecoilValue(orderItemState);
+	const [Modal, handleOpen] = useModal();
+	const { unBlockingWithCallback } = useRouteControl(handleOpen);
+	const orderList = useRecoilValue(orderItemState);
+	const resetCount = useResetRecoilState(orderListState);
+
+	const handleReset = useCallback(() => {
+		document.body.style.overflow = 'auto';
+		resetCount();
+	}, [resetCount]);
+
 	return (
 		<Wrapper>
 			{isFetching && <Loading type="order" />}
@@ -33,12 +41,14 @@ export function OrderListContainer({
 				<Modal.Overlay />
 				<Modal.Title>라우터 감지 모달</Modal.Title>
 				<Modal.CancelButton>취소</Modal.CancelButton>
-				<Modal.ExecuteButton unBlockingWithCallback={unBlockingWithCallback}>
+				<Modal.ExecuteButton
+					unBlockingWithCallback={() => unBlockingWithCallback(handleReset)}
+				>
 					나가기
 				</Modal.ExecuteButton>
 			</Modal>
-			{value
-				? value.map((item) => (
+			{orderList
+				? orderList.map((item) => (
 						<OrderItem
 							key={item.id}
 							id={item.id}

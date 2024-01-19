@@ -1,5 +1,5 @@
 import { createPortal } from 'react-dom';
-import React, { Children, isValidElement, useState } from 'react';
+import React, { Children, isValidElement, useCallback, useState } from 'react';
 
 interface TitlePropsType {
 	children: React.ReactNode;
@@ -22,14 +22,20 @@ type ModalType = {
 	ExecuteButton: (props: ExecuteButtonPropsType) => React.JSX.Element;
 };
 
-type ReturnType = [Modal: ModalType, HandleOpen: () => void];
+type ReturnType = [Modal: ModalType, handleOpen: () => void];
 
 function useModal(): ReturnType {
 	const [isOpen, setIsOpen] = useState<boolean>(false);
 
-	const HandleOpen = () => {
+	const handleOpen = useCallback(() => {
 		setIsOpen(true);
-	};
+		document.body.style.overflow = 'hidden';
+	}, [isOpen]);
+
+	const handleClose = useCallback(() => {
+		setIsOpen(false);
+		document.body.style.overflow = 'auto';
+	}, [isOpen]);
 
 	//FIXME: to Emotion
 	const overlayStyle = {
@@ -59,7 +65,7 @@ function useModal(): ReturnType {
 			<div
 				style={{ position: 'relative', zIndex: '999', display: 'inline-block' }}
 			>
-				<button style={{ color: 'black' }} onClick={() => setIsOpen(false)}>
+				<button style={{ color: 'black' }} onClick={handleClose}>
 					{children}
 				</button>
 			</div>
@@ -109,7 +115,6 @@ function useModal(): ReturnType {
 		const modalTitle = findChildren(children, Title);
 		const modalCancelButton = findChildren(children, CancelButton);
 		const modalExecuteButton = findChildren(children, ExecuteButton);
-		console.log(modalCancelButton);
 
 		//FIXME: to Emotion
 		return createPortal(
@@ -148,7 +153,7 @@ function useModal(): ReturnType {
 	Modal.CancelButton = CancelButton;
 	Modal.ExecuteButton = ExecuteButton;
 
-	return [Modal, HandleOpen];
+	return [Modal, handleOpen];
 }
 
 export default useModal;
