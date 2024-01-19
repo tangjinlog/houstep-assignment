@@ -5,7 +5,7 @@ type IntersectHandlerType = (
 	observer: IntersectionObserver,
 ) => void;
 
-export function useIntersect(
+function useIntersect(
 	intersectHandler: IntersectHandlerType,
 	options?: IntersectionObserverInit,
 ) {
@@ -31,3 +31,5 @@ export function useIntersect(
 
 	return ref;
 }
+
+export default useIntersect;

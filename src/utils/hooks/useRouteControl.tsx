@@ -55,7 +55,6 @@ function useRouteControl(
 	//다른 페이지 일때 && 뒤로가기 || 다른 페이지로 라우팅
 	const syncUrlWithRouter = useCallback(
 		(nextUrl: string) => {
-			console.log(router.asPath, window.location.pathname);
 			if (router.asPath !== window.location.pathname) {
 				if (nextUrl !== '/') {
 					//현재 path 유지
@@ -71,13 +70,6 @@ function useRouteControl(
 	//route blocking
 	const handleRouteChange = useCallback(
 		(nextUrl: string) => {
-			console.log(
-				isSamePath(nextUrl),
-				`pathname: ${window.location.pathname}`,
-				router.asPath,
-				nextUrl.split('?')[0],
-				nextUrl,
-			);
 			if (isSamePath(nextUrl)) {
 				return;
 			}
@@ -93,7 +85,6 @@ function useRouteControl(
 	//route unBlocking
 	const unBlockingWithCallback = useCallback(
 		(callback?: () => void) => {
-			console.log(nextUrl);
 			router.events.off('routeChangeStart', handleRouteChange);
 			router.replace(nextUrl);
 			callback?.();

@@ -1,13 +1,16 @@
 import styled from '@emotion/styled';
-import { orderItemState, orderListState } from '@states/atom';
+import {
+	orderItemState,
+	orderListState,
+	orderSelectedState,
+} from '@states/atom';
 import { useRecoilValue, useResetRecoilState } from 'recoil';
+import { useCallback } from 'react';
 import { flexColumn } from '@styles/mixins';
 import OrderItem from '@molecules/OrderItem';
 import Loading from '@molecules/Loading';
-import useModal from '@utils/hooks/useModal';
-import useRouteControl from '@utils/hooks/useRouteControl';
+import { useModal, useRouteControl } from '@utils/hooks';
 import type { OrderContainerPropsType } from '@templates/Order/OrderTemp';
-import { useCallback } from 'react';
 
 const Wrapper = styled.section`
 	${flexColumn};
@@ -25,9 +28,12 @@ export function OrderListContainer({
 	innerRef,
 }: OrderContainerPropsType) {
 	const [Modal, handleOpen] = useModal();
-	const { unBlockingWithCallback } = useRouteControl(handleOpen);
 	const orderList = useRecoilValue(orderItemState);
+	const isSelected = useRecoilValue(orderSelectedState);
 	const resetCount = useResetRecoilState(orderListState);
+	const { unBlockingWithCallback } = useRouteControl(handleOpen, {
+		condition: isSelected,
+	});
 
 	const handleReset = useCallback(() => {
 		document.body.style.overflow = 'auto';

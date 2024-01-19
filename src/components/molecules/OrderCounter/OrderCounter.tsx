@@ -47,7 +47,7 @@ interface OrderCounterProps {
 	setIsCounted: Dispatch<SetStateAction<boolean>>;
 }
 
-type OrderTypes = { id: string; count: number; totalPrice: number };
+export type OrderTypes = { id: string; count: number; totalPrice: number };
 
 function OrderCounter({ id, price, setIsCounted }: OrderCounterProps) {
 	const setOrderList = useSetRecoilState(orderListState);

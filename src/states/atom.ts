@@ -23,3 +23,8 @@ export const orderListState = atom({
 		},
 	],
 });
+
+export const orderSelectedState = atom({
+	key: `orderSelectedState`,
+	default: false,
+});
