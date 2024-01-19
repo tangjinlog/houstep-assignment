@@ -77,7 +77,7 @@ function OrderModal() {
 	};
 
 	useEffect(() => {
-		orderList.length - 1 === 0 ? isSelected(false) : isSelected(true);
+		orderList.length === 0 ? isSelected(false) : isSelected(true);
 	}, [orderList]);
 
 	console.log(orderList);
