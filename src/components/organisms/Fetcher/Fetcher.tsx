@@ -2,7 +2,7 @@ import { useFetchOrderItems } from '@queries/order/hooks';
 import { orderItemState } from '@states/atom';
 import { useEffect, useMemo } from 'react';
 import { useSetRecoilState } from 'recoil';
-import { useIntersect } from '@utils/hooks';
+import { useIntersect } from '@utils/hooks/useIntersect';
 
 export function OrderListItemFetcher({
 	children,
