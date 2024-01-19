@@ -2,6 +2,7 @@ import styled from '@emotion/styled';
 import Check from '@images/check.png';
 import Image from 'next/image';
 import { flexCenter } from '@styles/mixins';
+import { usePrevious } from '@utils/hooks';
 
 const Wrapper = styled.main`
 	${flexCenter};
@@ -15,6 +16,7 @@ const CompleteMessage = styled.p`
 `;
 
 function complete() {
+	usePrevious();
 	return (
 		<Wrapper>
 			<Image src={Check} width={48} height={48} alt={'Complete Check Image'} />

@@ -1,5 +1,6 @@
 import styled from '@emotion/styled';
 import { flexCenter } from '@styles/mixins';
+import { usePrevious } from '@utils/hooks';
 
 const Wrapper = styled.main`
 	${flexCenter};
@@ -12,6 +13,8 @@ const ErrorMessage = styled.p`
 `;
 
 function error() {
+	usePrevious();
+
 	return (
 		<Wrapper>
 			<ErrorMessage>{`주문에 실패하였습니다.\n다시 시도해주세요.`}</ErrorMessage>
