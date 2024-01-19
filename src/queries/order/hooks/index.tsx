@@ -22,7 +22,17 @@ export const useFetchOrderItems = () => {
 	};
 };
 
-export const useSubmitOrder = () => {
+export const useSubmitOrderComplete = () => {
+	const router = useRouter();
+	const { data, mutateAsync, isPending } = useMutation({
+		mutationKey: [...orderKey.submit(), 'complete'],
+		mutationFn: (orderList: OrderTypes[]) =>
+			new Promise((resolve) => setTimeout(() => resolve(1000), 1000)),
+		onSuccess: () => router.push('/complete'),
+	});
+	return { data, mutateAsync, isPending };
+};
+export const useSubmitOrderError = () => {
 	const router = useRouter();
 	const { data, mutateAsync, isPending } = useMutation({
 		mutationKey: orderKey.submit(),

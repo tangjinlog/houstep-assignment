@@ -1,10 +1,13 @@
 import styled from '@emotion/styled';
 import { css } from '@emotion/react';
-import { useEffect } from 'react';
+import { useCallback, useEffect } from 'react';
 import Button from '@atoms/Button';
 import { fontMid } from '@styles/fonts';
 import { flexColumn, fixed } from '@styles/mixins';
-import { useSubmitOrder } from '@queries/order/hooks';
+import {
+	useSubmitOrderComplete,
+	useSubmitOrderError,
+} from '@queries/order/hooks';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { orderListState, orderSelectedState } from '@states/atom';
 import type { ButtonPropTypes } from '@atoms/Button/Button';
@@ -59,7 +62,8 @@ const OrderButton = styled(Button)<OrderButtonPropTypes>`
 function OrderModal() {
 	const isSelected = useSetRecoilState(orderSelectedState);
 	const orderList = useRecoilValue(orderListState);
-	const { data, mutateAsync, isPending } = useSubmitOrder();
+	const { data, mutateAsync, isPending } = useSubmitOrderComplete();
+	// const { data, mutateAsync, isPending } = useSubmitOrderError();
 	const [totalCount, totalPrice] =
 		orderList &&
 		orderList.reduce(
@@ -71,10 +75,10 @@ function OrderModal() {
 			[0, 0],
 		);
 
-	const handleClick = () => {
+	const handleClick = useCallback(() => {
 		mutateAsync(orderList);
 		isSelected(false);
-	};
+	}, [orderList]);
 
 	useEffect(() => {
 		orderList.length === 0 ? isSelected(false) : isSelected(true);
