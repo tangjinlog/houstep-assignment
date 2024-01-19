@@ -61,7 +61,7 @@ function OrderItem({ id, name, event, materialType, price }: OrderItemProps) {
 				</OrderItem.Title>
 				<PriceWrapper>
 					<OrderCounter id={id} price={price} setIsCounted={setIsCounted} />
-					<OrderItem.Price>{price}원</OrderItem.Price>
+					<OrderItem.Price>{price.toLocaleString()}원</OrderItem.Price>
 				</PriceWrapper>
 			</ContentWrapper>
 		</Wrapper>
