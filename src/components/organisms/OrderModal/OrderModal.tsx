@@ -60,12 +60,11 @@ function OrderModal() {
 			},
 			[0, 0],
 		);
-	//TODO: 가격 점 찍기
 	return (
 		<Wrapper>
 			<div>
 				<OrderCount>{`총 수량 : ${totalCount}개`}</OrderCount>
-				<OrderPrice>{`총 가격 : ${totalPrice}원`}</OrderPrice>
+				<OrderPrice>{`총 가격 : ${totalPrice.toLocaleString()}원`}</OrderPrice>
 			</div>
 			<OrderButton totalCount={totalCount} disabled={totalCount === 0}>
 				주문하기
