@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { fullScreen, flexCenter } from '@styles/mixins';
+import { fullScreen, flexCenter, ani } from '@styles/mixins';
 import Button from '@atoms/Button';
 import Logo from '@atoms/Logo';
 import Link from 'next/link';
@@ -12,7 +12,9 @@ const Wrapper = styled.section`
 	gap: var(--gap-l);
 `;
 
-const OrderPageButton = styled(Link)``;
+const OrderPageButton = styled(Link)`
+	${ani('click')};
+`;
 
 function index() {
 	return (

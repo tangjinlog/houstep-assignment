@@ -38,7 +38,7 @@ export const fixed = (props: FixedType) => css`
 	bottom: ${props === 'bottom' || props === 'all' ? 0 : `initial`};
 `;
 
-type AniType = 'tremble' | 'pop';
+type AniType = 'tremble' | 'pop' | 'click';
 export const ani = (props: AniType) => {
 	if (props === 'tremble') {
 		const tremble = keyframes`
@@ -70,6 +70,17 @@ export const ani = (props: AniType) => {
 		`;
 		return css`
 			animation: ${pop} 0.1s ease-in-out forwards;
+		`;
+	} else if (props === 'click') {
+		const click = keyframes`
+			to {
+			transform: scale(0.9) ;
+		}
+		`;
+		return css`
+			&:active {
+				animation: ${click} 0.07s ease-in-out forwards;
+			}
 		`;
 	}
 };
