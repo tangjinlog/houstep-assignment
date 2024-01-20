@@ -2,7 +2,7 @@ import styled from '@emotion/styled';
 import { flexCenter } from '@styles/mixins';
 import { usePrevious } from '@utils/hooks';
 
-const Wrapper = styled.main`
+const Wrapper = styled.section`
 	${flexCenter};
 	height: 100vh;
 `;

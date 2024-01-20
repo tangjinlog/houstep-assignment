@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { flexCenter } from '@styles/mixins';
 import { usePrevious } from '@utils/hooks';
 
-const Wrapper = styled.main`
+const Wrapper = styled.section`
 	${flexCenter};
 	flex-direction: column;
 	height: 100vh;

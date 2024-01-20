@@ -4,7 +4,7 @@ import Button from '@atoms/Button';
 import Logo from '@atoms/Logo';
 import Link from 'next/link';
 
-const Wrapper = styled.main`
+const Wrapper = styled.section`
 	${fullScreen};
 	${flexCenter};
 	flex-direction: column;

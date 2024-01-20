@@ -3,7 +3,7 @@ import Button from '@atoms/Button';
 import { flexCenter, flexColumn } from '@styles/mixins';
 import { fontMid } from '@styles/fonts';
 
-const Wrapper = styled.main`
+const Wrapper = styled.section`
 	${flexCenter};
 	position: absolute;
 	width: 100%;
