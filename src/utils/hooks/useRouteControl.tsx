@@ -40,10 +40,7 @@ function useRouteControl(
 	const [nextUrl, setNextUrl] = useState<string>('');
 	const router = useRouter();
 
-	//optional undefined 방지
 	normalizeOptions(options, defaultControlOptions);
-
-	//reload 감지
 	useEffect(() => {
 		const preventReload = (e: BeforeUnloadEvent) => {
 			e.preventDefault();
@@ -51,29 +48,25 @@ function useRouteControl(
 		if (
 			options.reload &&
 			options.condition &&
-			options.exceptUrl?.includes(nextUrl)
+			!options.exceptUrl?.includes(nextUrl)
 		) {
 			window.addEventListener('beforeunload', preventReload);
 		}
 		return () => {
 			window.removeEventListener('beforeunload', preventReload);
 		};
-	}, [options.reload, options.condition, nextUrl]);
+	}, [options.reload, options.condition, options.exceptUrl, nextUrl]);
 
-	//같은 페이지 유무
 	const isSamePath = useCallback(
 		(nextUrl: string) => router.asPath.split('?')[0] === nextUrl.split('?')[0],
 		[router.asPath],
 	);
 
-	//다른 페이지 일때 && 뒤로가기 || 다른 페이지로 라우팅
 	const syncUrlWithRouter = useCallback(
 		(nextUrl: string) => {
 			if (router.asPath !== window.location.pathname) {
 				if (nextUrl !== '/') {
-					//현재 path 유지
 					window.history.pushState(null, '', router.asPath);
-					//뒤로가기 버튼 클릭 전 path로 초기화
 					router.replace(router.asPath);
 				}
 			}
@@ -81,7 +74,6 @@ function useRouteControl(
 		[router.asPath, nextUrl],
 	);
 
-	//route blocking
 	const handleRouteChange = useCallback(
 		(nextUrl: string) => {
 			if (isSamePath(nextUrl)) {
@@ -96,7 +88,6 @@ function useRouteControl(
 		[router.asPath, nextUrl, syncUrlWithRouter, isSamePath, blockingCallback],
 	);
 
-	//route unBlocking
 	const unBlockingWithCallback = useCallback(
 		(callback?: () => void) => {
 			router.events.off('routeChangeStart', handleRouteChange);
@@ -106,7 +97,6 @@ function useRouteControl(
 		[router.events, nextUrl, handleRouteChange],
 	);
 
-	//router events 등록
 	useEffect(() => {
 		if (options.condition) {
 			router.events.on('routeChangeStart', handleRouteChange);
