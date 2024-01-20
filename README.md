@@ -76,7 +76,7 @@ yarn server-test
 
 #### ErrorBoundary
 
-<img src="public/md/image-12.png" width="175" height="432"/>
+<img src="public/md/image-12.png" width="175" height="432"/>(json-server를 끄면 볼 수 있습니다)
 
 컴포넌트 가장 바깥에 둔 `GlobalErrorBoundary` 와 각 api 요청에 대한 책임만 가지는 Fetcher 컴포넌트를 감싸는 `ApiErrorBoundary`를 두어 에러를 핸들링함으로써 앱의 안정성을 높혔습니다.
 
