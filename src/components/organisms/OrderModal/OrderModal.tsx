@@ -62,7 +62,9 @@ const OrderButton = styled(Button)<OrderButtonPropTypes>`
 function OrderModal() {
 	const isSelected = useSetRecoilState(orderSelectedState);
 	const orderList = useRecoilValue(orderListState);
+	// Complete용 query
 	const { data, mutateAsync, isPending } = useSubmitOrderComplete();
+	// Error용 query
 	// const { data, mutateAsync, isPending } = useSubmitOrderError();
 	const [totalCount, totalPrice] =
 		orderList &&

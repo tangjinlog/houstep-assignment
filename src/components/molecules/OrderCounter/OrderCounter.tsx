@@ -66,6 +66,7 @@ function OrderCounter({ id, price, setIsCounted }: OrderCounterProps) {
 		const count = orderList.find((list) => list.id === id)?.count;
 		count && setCount(count);
 		count && setIsCounted(true);
+		setOrderList((prev) => prev.filter((e) => e.id !== ''));
 	}, []);
 
 	const mapSetter = useCallback(

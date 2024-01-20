@@ -45,7 +45,8 @@ export function OrderListContainer({
 			{isFetching && <Loading type="order" />}
 			<Modal>
 				<Modal.Overlay />
-				<Modal.Title>라우터 감지 모달</Modal.Title>
+				<Modal.Title>정말 나가시겠습니까?</Modal.Title>
+				<Modal.Desc>작성중인 주문서가 초기화됩니다.</Modal.Desc>
 				<Modal.CancelButton>취소</Modal.CancelButton>
 				<Modal.ExecuteButton
 					unBlockingWithCallback={() => unBlockingWithCallback(handleReset)}
