@@ -160,6 +160,7 @@ function OrderCounter({ id, price, setIsCounted }: OrderCounterProps) {
 						name="counter"
 						value={count}
 						onChange={(e) => setCount(Number(e.target.value))}
+						min={0}
 						max={999}
 						autoFocus
 					/>

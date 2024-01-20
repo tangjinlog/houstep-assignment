@@ -10,7 +10,6 @@ function useIntersect(
 	options?: IntersectionObserverInit,
 ) {
 	const ref = useRef<HTMLDivElement>(null);
-	console.log(`ref`, ref);
 	const detectIntersection = useCallback(
 		(entries: IntersectionObserverEntry[], observer: IntersectionObserver) => {
 			entries.forEach((entry) => {
@@ -21,7 +20,6 @@ function useIntersect(
 	);
 
 	useEffect(() => {
-		console.log(`uef ref`, ref);
 		if (!ref.current) return;
 		const observer = new IntersectionObserver(detectIntersection, options);
 		observer.observe(ref.current);
