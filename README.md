@@ -20,6 +20,10 @@
 ## 실행 커맨드
 
 ```bash
+# clone
+https://github.com/tangjinlog/houstep-assignment.git
+cd houstep-assignment
+
 # Node.js version >= v18.17.0 is required
 
 yarn dev
