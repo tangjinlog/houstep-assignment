@@ -9,7 +9,9 @@ interface LogoProps {
 function Logo({ size }: LogoProps) {
 	switch (size) {
 		case 'big':
-			return <Image src={LogoBig} width={150} height={51} alt="Home Logo" />;
+			return (
+				<Image src={LogoBig} width={150} height={51} alt="Home Logo" priority />
+			);
 		case 'mid':
 			return <Image src={LogoMid} height={32} alt="Home Logo" />;
 	}
