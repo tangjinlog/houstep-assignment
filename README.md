@@ -21,14 +21,18 @@
 
 ```bash
 # clone
-https://github.com/tangjinlog/houstep-assignment.git
+git clone https://github.com/tangjinlog/houstep-assignment.git
+
 cd houstep-assignment
 
-# Node.js version >= v18.17.0 is required
+yarn
 
+# Node.js version >= v18.17.0 is required
 yarn dev
+
 # 기본 서버 실행
 yarn server
+
 # 무한 스크롤 테스트용 서버 실행
 yarn server-test
 ```
