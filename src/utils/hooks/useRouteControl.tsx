@@ -15,9 +15,19 @@ type ControlOptions = {
 	 * @defaultValue `true`
 	 */
 	condition?: boolean | undefined;
+	/**
+	 * 이벤트 동작을 제외시킬 nextUrl
+	 *
+	 * @defaultValue ['']
+	 */
+	exceptUrl?: string[] | undefined;
 };
 
-const defaultControlOptions: ControlOptions = { reload: true, condition: true };
+const defaultControlOptions: ControlOptions = {
+	reload: true,
+	condition: true,
+	exceptUrl: [''],
+};
 
 /**
  * @param {Function} blockingCallback Routing을 막는 Callback함수
@@ -38,13 +48,17 @@ function useRouteControl(
 		const preventReload = (e: BeforeUnloadEvent) => {
 			e.preventDefault();
 		};
-		if (options.reload && options.condition) {
+		if (
+			options.reload &&
+			options.condition &&
+			options.exceptUrl?.includes(nextUrl)
+		) {
 			window.addEventListener('beforeunload', preventReload);
 		}
 		return () => {
 			window.removeEventListener('beforeunload', preventReload);
 		};
-	}, [options.reload, options.condition]);
+	}, [options.reload, options.condition, nextUrl]);
 
 	//같은 페이지 유무
 	const isSamePath = useCallback(

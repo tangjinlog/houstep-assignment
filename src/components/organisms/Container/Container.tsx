@@ -33,6 +33,7 @@ export function OrderListContainer({
 	const resetCount = useResetRecoilState(orderListState);
 	const { unBlockingWithCallback } = useRouteControl(handleOpen, {
 		condition: isSelected,
+		exceptUrl: ['/complete', '/error'],
 	});
 
 	const handleReset = useCallback(() => {
