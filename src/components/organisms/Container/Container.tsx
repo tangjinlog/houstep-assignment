@@ -6,7 +6,7 @@ import {
 } from '@states/atom';
 import { useRecoilValue, useResetRecoilState } from 'recoil';
 import { useCallback } from 'react';
-import { flexColumn } from '@styles/mixins';
+import { ani, flexColumn } from '@styles/mixins';
 import OrderItem from '@molecules/OrderItem';
 import Loading from '@molecules/Loading';
 import { useModal, useRouteControl } from '@utils/hooks';
@@ -17,6 +17,10 @@ const Wrapper = styled.section`
 	gap: 18px;
 	padding: var(--padding-s) var(--padding-m) 200px;
 	margin-top: 57px;
+`;
+
+const Motion = styled.div`
+	${ani('pop')};
 `;
 
 const Target = styled.div`
@@ -37,24 +41,26 @@ export function OrderListContainer({
 	});
 
 	const handleReset = useCallback(() => {
-		document.body.style.overflow = 'auto';
+		document.body.style.overflowY = 'auto';
 		resetCount();
 	}, [resetCount]);
 
 	return (
 		<Wrapper>
 			{isFetching && <Loading type="order" />}
-			<Modal>
-				<Modal.Overlay />
-				<Modal.Title>정말 나가시겠습니까?</Modal.Title>
-				<Modal.Desc>작성중인 주문서가 초기화됩니다.</Modal.Desc>
-				<Modal.CancelButton>취소</Modal.CancelButton>
-				<Modal.ExecuteButton
-					unBlockingWithCallback={() => unBlockingWithCallback(handleReset)}
-				>
-					나가기
-				</Modal.ExecuteButton>
-			</Modal>
+			<Motion>
+				<Modal>
+					<Modal.Overlay />
+					<Modal.Title>정말 나가시겠습니까?</Modal.Title>
+					<Modal.Desc>작성중인 주문서가 초기화됩니다.</Modal.Desc>
+					<Modal.CancelButton>취소</Modal.CancelButton>
+					<Modal.ExecuteButton
+						unBlockingWithCallback={() => unBlockingWithCallback(handleReset)}
+					>
+						나가기
+					</Modal.ExecuteButton>
+				</Modal>
+			</Motion>
 			{orderList
 				? orderList.map((item) => (
 						<OrderItem

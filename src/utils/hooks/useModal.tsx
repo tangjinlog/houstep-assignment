@@ -1,5 +1,7 @@
 import { createPortal } from 'react-dom';
 import React, { Children, isValidElement, useCallback, useState } from 'react';
+import { ani } from '@styles/mixins';
+import styled from '@emotion/styled';
 
 interface ModalDefaultPropsType {
 	children: React.ReactNode;
@@ -26,12 +28,12 @@ function useModal(): ReturnType {
 
 	const handleOpen = useCallback(() => {
 		setIsOpen(true);
-		document.body.style.overflow = 'hidden';
+		document.body.style.overflowY = 'hidden';
 	}, [isOpen]);
 
 	const handleClose = useCallback(() => {
 		setIsOpen(false);
-		document.body.style.overflow = 'auto';
+		document.body.style.overflowY = 'auto';
 	}, [isOpen]);
 
 	const overlayStyle = {
@@ -43,12 +45,36 @@ function useModal(): ReturnType {
 		backgroundColor: 'rgba(0, 0, 0, 0.4)',
 	} as const;
 
+	const buttonStyle = {
+		fontSize: '16px',
+		fontWeight: 'bold',
+		border: 'none',
+		background: 'none',
+		cursor: 'pointer',
+	} as const;
+
+	const Motion = styled.div`
+		${ani('pop')};
+		position: fixed;
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		top: 50%;
+		left: 50%;
+		width: 300px;
+		height: 150px;
+		z-index: 999;
+		padding: 18px;
+		background-color: white;
+		border-radius: 18px;
+	`;
+
 	const Overlay = () => {
 		return <div style={overlayStyle}></div>;
 	};
 
 	const Title = ({ children }: { children: React.ReactNode }) => {
-		return <h3 style={{}}>{children}</h3>;
+		return <h3>{children}</h3>;
 	};
 
 	const Description = ({ children }: { children: React.ReactNode }) => {
@@ -58,13 +84,7 @@ function useModal(): ReturnType {
 	const CancelButton = ({ children }: { children: React.ReactNode }) => {
 		return (
 			<button
-				style={{
-					color: '#3492f1',
-					fontSize: '16px',
-					fontWeight: 'bold',
-					border: 'none',
-					background: 'none',
-				}}
+				style={{ ...buttonStyle, color: '#3492f1' }}
 				onClick={handleClose}
 			>
 				{children}
@@ -78,13 +98,7 @@ function useModal(): ReturnType {
 	}: ExecuteButtonPropsType) => {
 		return (
 			<button
-				style={{
-					color: '#cf454a',
-					fontSize: '16px',
-					fontWeight: 'bold',
-					border: 'none',
-					background: 'none',
-				}}
+				style={{ ...buttonStyle, color: '#cf454a' }}
 				onClick={() => unBlockingWithCallback()}
 			>
 				{children}
@@ -123,29 +137,14 @@ function useModal(): ReturnType {
 			<div
 				style={{
 					position: 'fixed',
+					top: '0',
 					width: '100%',
 					height: '100%',
 					zIndex: '999',
 				}}
 			>
 				{modalOverlay ? <>{modalOverlay}</> : null}
-				<div
-					style={{
-						position: 'fixed',
-						display: 'flex',
-						flexDirection: 'column',
-						justifyContent: 'space-between',
-						top: '50%',
-						left: '50%',
-						width: '300px',
-						height: '150px',
-						zIndex: '999',
-						padding: '18px',
-						background: 'white',
-						borderRadius: '18px',
-						transform: 'translate3d(-50%,-50%,0)',
-					}}
-				>
+				<Motion>
 					{modalTitle ? <>{modalTitle}</> : null}
 					{modalDesc ? <>{modalDesc}</> : null}
 					<div
@@ -158,7 +157,7 @@ function useModal(): ReturnType {
 						{modalCancelButton ? <>{modalCancelButton}</> : null}
 						{modalExecuteButton ? <>{modalExecuteButton}</> : null}
 					</div>
-				</div>
+				</Motion>
 			</div>,
 			document.getElementById('modal')!,
 		);

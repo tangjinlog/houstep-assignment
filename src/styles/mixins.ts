@@ -1,4 +1,4 @@
-import { css } from '@emotion/react';
+import { css, keyframes } from '@emotion/react';
 
 export const flexCenter = css`
 	display: flex;
@@ -37,3 +37,39 @@ export const fixed = (props: FixedType) => css`
 	right: ${props === 'all' ? 0 : `initial`};
 	bottom: ${props === 'bottom' || props === 'all' ? 0 : `initial`};
 `;
+
+type AniType = 'tremble' | 'pop';
+export const ani = (props: AniType) => {
+	if (props === 'tremble') {
+		const tremble = keyframes`
+				0% {
+			transform: rotate(25deg) scale(2);
+		}
+		20% {
+			transform: rotate(-45deg) scale(1.2);
+		}
+		40% {
+			transform: rotate(20deg);
+		}
+		60% {
+			transform: rotate(-20deg);
+		}
+		`;
+
+		return css`
+			animation: ${tremble} 1s ease forwards;
+		`;
+	} else if (props === 'pop') {
+		const pop = keyframes`
+			0% {
+			transform: translate3d(-50%,-50%,0) scale(0.3) ;
+		}
+		100% {
+			transform: translate3d(-50%,-50%,0) scale(1);
+		}
+		`;
+		return css`
+			animation: ${pop} 0.1s ease-in-out forwards;
+		`;
+	}
+};
