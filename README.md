@@ -6,11 +6,16 @@
 <img src="https://img.shields.io/badge/commits-64-3" />
 
 ## Stack
+<p align="left">
+	<img src="https://img.shields.io/badge/TypeScript-3178C6?style=flat&logo=TypeScript&logoColor=white" width="20%"/>
+	<img src="https://img.shields.io/badge/Next.js-000000?style=flat&logo=nextdotjs&logoColor=white" width="20%"/>
+ 	<img src="https://img.shields.io/badge/Emotion-purple?style=flat&logo=Emotion&logoColor=white" width="20%"/>
+	<img src="https://img.shields.io/badge/ReactQuery-FF4154?style=flat&logo=ReactQuery&logoColor=white" width="20%"/>
+</p>
 
-<img src="https://img.shields.io/badge/TypeScript-3178C6?style=flat&logo=TypeScript&logoColor=white"/>
-<img src="https://img.shields.io/badge/Next.js-000000?style=flat&logo=nextdotjs&logoColor=white"/>
-<img src="https://img.shields.io/badge/Emotion-purple?style=flat&logo=Emotion&logoColor=white"/>
-<img src="https://img.shields.io/badge/ReactQuery-FF4154?style=flat&logo=ReactQuery&logoColor=white"/>
+
+
+
 
 ## 실행 커맨드
 
@@ -35,18 +40,20 @@ yarn server-test
 컴포넌트의 재사용성과 유지보수를 고려해 아토믹 디자인 패턴으로 설계했습니다.<br>
 
 ### Pages
-
-<img src="public/md/image-2.png" width="175" height="432"/>
-<img src="public/md/image-3.png" width="175" height="432"/>
-<img src="public/md/image-4.png" width="175" height="432"/>
-<img src="public/md/image-7.png" width="175" height="432"/>
-<img src="public/md/image-5.png" width="175" height="432"/>
-<img src="public/md/image-6.png" width="175" height="432"/>
+<p align="left">
+	<img src="public/md/image-2.png" width="175" height="432"/>
+	<img src="public/md/image-3.png" width="175" height="432"/>
+	<img src="public/md/image-4.png" width="175" height="432"/>
+	<img src="public/md/image-7.png" width="175" height="432"/>
+	<img src="public/md/image-5.png" width="175" height="432"/>
+	<img src="public/md/image-6.png" width="175" height="432"/>
+</p>
 
 ### Feature
-
+<p align="left">
 <img src="public/md/image-8.png" width="175" height="432"/>
 <img src="public/md/image-9.png" width="175" height="432"/>
+</p>
 
 사용자가 실수로 잘못 클릭해서 주문 페이지를 이탈하는 상황을 방지하기위해, `Confirm Modal`을 추가했습니다. 추가로, 주문중인 상태에서 새로고침시에도 한번 더 확인하도록 구현했습니다.
 
