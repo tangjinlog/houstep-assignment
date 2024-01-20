@@ -1,11 +1,17 @@
 import styled from '@emotion/styled';
 import { css } from '@emotion/react';
-import { Dispatch, SetStateAction, useCallback, useState } from 'react';
+import {
+	Dispatch,
+	SetStateAction,
+	useCallback,
+	useEffect,
+	useState,
+} from 'react';
 import Button from '@atoms/Button';
 import { fontMid } from '@styles/fonts';
 import { orderListState } from '@states/atom';
-import { useSetRecoilState } from 'recoil';
-//TODO: useRouteControl 적용
+import { useRecoilState } from 'recoil';
+
 const buttonStyle = css`
 	${fontMid};
 	display: inline-block;
@@ -47,19 +53,26 @@ interface OrderCounterProps {
 	setIsCounted: Dispatch<SetStateAction<boolean>>;
 }
 
-type OrderTypes = { id: string; count: number; totalPrice: number };
+export type OrderTypes = { id: string; count: number; totalPrice: number };
 
 function OrderCounter({ id, price, setIsCounted }: OrderCounterProps) {
-	const setOrderList = useSetRecoilState(orderListState);
+	const [orderList, setOrderList] = useRecoilState(orderListState);
 	const [isClicked, setIsClicked] = useState(false);
 	const [count, setCount] = useState(0);
 
 	let orderMap = new Map();
 
+	useEffect(() => {
+		const count = orderList.find((list) => list.id === id)?.count;
+		count && setCount(count);
+		count && setIsCounted(true);
+		setOrderList((prev) => prev.filter((e) => e.id !== ''));
+	}, []);
+
 	const mapSetter = useCallback(
 		(map: Map<string, OrderTypes>, obj: OrderTypes, type?: 'inc' | 'dec') => {
 			if (type) {
-				return orderMap.set(id, {
+				return map.set(id, {
 					id,
 					count: type === 'inc' ? count + 1 : count - 1,
 					totalPrice:
@@ -92,9 +105,9 @@ function OrderCounter({ id, price, setIsCounted }: OrderCounterProps) {
 			mapSetter(orderMap, updatedOrder);
 
 			const updatedList: OrderTypes[] = [...orderMap].flatMap(
-				([key, orderList]) => orderList,
+				([key, orderList]: [string, OrderTypes[]]) => orderList,
 			);
-			return updatedList;
+			return updatedList.filter((list) => list.count !== 0);
 		},
 		[count],
 	);
@@ -148,6 +161,7 @@ function OrderCounter({ id, price, setIsCounted }: OrderCounterProps) {
 						name="counter"
 						value={count}
 						onChange={(e) => setCount(Number(e.target.value))}
+						min={0}
 						max={999}
 						autoFocus
 					/>

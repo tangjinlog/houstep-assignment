@@ -1,4 +1,4 @@
-import { css } from '@emotion/react';
+import { css, keyframes } from '@emotion/react';
 
 export const flexCenter = css`
 	display: flex;
@@ -29,9 +29,58 @@ export const absoluteCenter = css`
 	transform: translate3d(-50%, -50%, 0);
 `;
 
-type FixedType = 'top' | 'bottom';
+type FixedType = 'top' | 'bottom' | 'all';
 export const fixed = (props: FixedType) => css`
 	position: fixed;
-	top: ${props === 'top' ? 0 : `initial`};
-	bottom: ${props === 'bottom' ? 0 : `initial`};
+	top: ${props === 'top' || props === 'all' ? 0 : `initial`};
+	left: ${props === 'all' ? 0 : `initial`};
+	right: ${props === 'all' ? 0 : `initial`};
+	bottom: ${props === 'bottom' || props === 'all' ? 0 : `initial`};
 `;
+
+type AniType = 'tremble' | 'pop' | 'click';
+export const ani = (props: AniType) => {
+	if (props === 'tremble') {
+		const tremble = keyframes`
+				0% {
+			transform: rotate(25deg) scale(2);
+		}
+		20% {
+			transform: rotate(-45deg) scale(1.2);
+		}
+		40% {
+			transform: rotate(20deg);
+		}
+		60% {
+			transform: rotate(-20deg);
+		}
+		`;
+
+		return css`
+			animation: ${tremble} 1s ease forwards;
+		`;
+	} else if (props === 'pop') {
+		const pop = keyframes`
+			0% {
+			transform: translate3d(-50%,-50%,0) scale(0.3) ;
+		}
+		100% {
+			transform: translate3d(-50%,-50%,0) scale(1);
+		}
+		`;
+		return css`
+			animation: ${pop} 0.1s ease-in-out forwards;
+		`;
+	} else if (props === 'click') {
+		const click = keyframes`
+			to {
+			transform: scale(0.9) ;
+		}
+		`;
+		return css`
+			&:active {
+				animation: ${click} 0.07s ease-in-out forwards;
+			}
+		`;
+	}
+};

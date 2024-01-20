@@ -5,12 +5,11 @@ type IntersectHandlerType = (
 	observer: IntersectionObserver,
 ) => void;
 
-export function useIntersect(
+function useIntersect(
 	intersectHandler: IntersectHandlerType,
 	options?: IntersectionObserverInit,
 ) {
 	const ref = useRef<HTMLDivElement>(null);
-	console.log(`ref`, ref);
 	const detectIntersection = useCallback(
 		(entries: IntersectionObserverEntry[], observer: IntersectionObserver) => {
 			entries.forEach((entry) => {
@@ -21,7 +20,6 @@ export function useIntersect(
 	);
 
 	useEffect(() => {
-		console.log(`uef ref`, ref);
 		if (!ref.current) return;
 		const observer = new IntersectionObserver(detectIntersection, options);
 		observer.observe(ref.current);
@@ -31,3 +29,5 @@ export function useIntersect(
 
 	return ref;
 }
+
+export default useIntersect;

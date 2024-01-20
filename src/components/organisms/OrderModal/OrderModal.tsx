@@ -1,10 +1,15 @@
 import styled from '@emotion/styled';
 import { css } from '@emotion/react';
+import { useCallback, useEffect } from 'react';
 import Button from '@atoms/Button';
-import { flexColumn, fixed } from '@styles/mixins';
 import { fontMid } from '@styles/fonts';
-import { useRecoilValue } from 'recoil';
-import { orderListState } from '@states/atom';
+import { flexColumn, fixed } from '@styles/mixins';
+import {
+	useSubmitOrderComplete,
+	useSubmitOrderError,
+} from '@queries/order/hooks';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { orderListState, orderSelectedState } from '@states/atom';
 import type { ButtonPropTypes } from '@atoms/Button/Button';
 
 const Wrapper = styled.div`
@@ -31,6 +36,7 @@ const OrderPrice = styled.div`
 
 interface OrderButtonPropTypes extends ButtonPropTypes {
 	totalCount: number;
+	isPending: boolean;
 }
 
 const OrderButton = styled(Button)<OrderButtonPropTypes>`
@@ -46,10 +52,20 @@ const OrderButton = styled(Button)<OrderButtonPropTypes>`
 					background-color: var(--black);
 				`
 			: ''}
+	${(props) =>
+		props.isPending
+			? css`
+					background-color: var(--color-gray-3);
+				`
+			: ''}
 `;
-
 function OrderModal() {
+	const isSelected = useSetRecoilState(orderSelectedState);
 	const orderList = useRecoilValue(orderListState);
+	// Complete용 query
+	const { data, mutateAsync, isPending } = useSubmitOrderComplete();
+	// Error용 query
+	// const { data, mutateAsync, isPending } = useSubmitOrderError();
 	const [totalCount, totalPrice] =
 		orderList &&
 		orderList.reduce(
@@ -60,6 +76,16 @@ function OrderModal() {
 			},
 			[0, 0],
 		);
+
+	const handleClick = useCallback(() => {
+		mutateAsync(orderList);
+		isSelected(false);
+	}, [orderList]);
+
+	useEffect(() => {
+		orderList.length === 0 ? isSelected(false) : isSelected(true);
+	}, [orderList]);
+
 	console.log(orderList);
 	return (
 		<Wrapper>
@@ -67,8 +93,13 @@ function OrderModal() {
 				<OrderCount>{`총 수량 : ${totalCount}개`}</OrderCount>
 				<OrderPrice>{`총 가격 : ${totalPrice.toLocaleString()}원`}</OrderPrice>
 			</div>
-			<OrderButton totalCount={totalCount} disabled={totalCount === 0}>
-				주문하기
+			<OrderButton
+				totalCount={totalCount}
+				isPending={isPending}
+				disabled={totalCount === 0}
+				onClick={handleClick}
+			>
+				{isPending ? `로딩중...` : `주문하기`}
 			</OrderButton>
 		</Wrapper>
 	);

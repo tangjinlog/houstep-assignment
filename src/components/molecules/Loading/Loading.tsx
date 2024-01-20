@@ -7,7 +7,6 @@ const Wrapper = styled.section`
 	height: calc(100vh - 170px);
 	text-align: center;
 	white-space: pre-wrap;
-	outline: 1px solid red;
 `;
 const LoadingContent = styled.p``;
 
